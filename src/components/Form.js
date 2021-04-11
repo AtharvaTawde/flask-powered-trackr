@@ -1,7 +1,7 @@
 import React from "react";
 
 function Form({ type, name, description, date, updName, updDescription, updDate, addTask, addTip, toggleForm }) {
-  if (type == "task") {
+  if (type === "task") {
     return (
       <React.Fragment>
         <div className="covering-panel"></div>
