@@ -86,7 +86,7 @@ p {
 }
 
 .covering-panel {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.75);
   height: 100%;
   position: fixed;
   width: 100%;

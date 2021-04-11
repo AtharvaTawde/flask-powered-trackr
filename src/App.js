@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Tasks from "./components/Tasks";
 import Tips from "./components/Tips";
-import Form from './components/Form'
+import Form from "./components/Form";
 
 function App() {
   // States
@@ -34,24 +34,37 @@ function App() {
     },
   ]);
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
+  const [taskName, setTaskName] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
+  const [taskDate, setTaskDate] = useState("");
   const [isTaskFormOpen, setTaskFormStatus] = useState(false);
+  const [tipName, setTipName] = useState("");
+  const [tipDescription, setTipDescription] = useState("");
+  const [isTipFormOpen, setTipFormStatus] = useState(false);
 
   // Update Task Name
-  function updateName(event) {
-    setName(event.target.value);
+  function updateTaskName(event) {
+    setTaskName(event.target.value);
   }
 
   // Update Task Description
-  function updateDescription(event) {
-    setDescription(event.target.value);
+  function updateTaskDescription(event) {
+    setTaskDescription(event.target.value);
   }
 
   // Update Task Date
-  function updateDate(event) {
-    setDate(event.target.value);
+  function updateTaskDate(event) {
+    setTaskDate(event.target.value);
+  }
+
+  // Update Tip Name
+  function updateTipName(event) {
+    setTipName(event.target.value);
+  }
+
+  // Update Tip Description
+  function updateTipDescription(event) {
+    setTipDescription(event.target.value);
   }
 
   // Add Task
@@ -59,15 +72,15 @@ function App() {
     const id = Math.floor(Math.random() * 100000);
     const newTask = {
       id: parseInt(id),
-      name: name,
-      description: description,
-      date: date,
+      name: taskName,
+      description: taskDescription,
+      date: taskDate,
     };
 
     setTasks([...tasks, newTask]);
-    setName("");
-    setDescription("");
-    setDate("");
+    setTaskName("");
+    setTaskDescription("");
+    setTaskDate("");
     setTaskFormStatus(!isTaskFormOpen);
     event.preventDefault();
   }
@@ -77,35 +90,78 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   }
 
-  // Open and Close Form
+  // Open and Close Task Form
   function toggleTaskForm() {
     setTaskFormStatus(!isTaskFormOpen);
   }
 
+  // Add Tip
+  function addTip(event) {
+    const id = Math.floor(Math.random() * 100000);
+    const newTip = {
+      id: parseInt(id),
+      name: tipName,
+      description: tipDescription,
+    };
+
+    setTips([...tips, newTip]);
+    setTipName("");
+    setTipDescription("");
+    setTipFormStatus(!isTipFormOpen);
+    event.preventDefault();
+  }
+
+  // Remove Task
+  function removeTip(id) {
+    setTips(tips.filter((tip) => tip.id !== id));
+  }
+
+  // Open and Close Task Form
+  function toggleTipForm() {
+    setTipFormStatus(!isTipFormOpen);
+  }
+
   return (
-    <div className={isTaskFormOpen ? "stop-scrolling" : ""}>
+    <div className="App">
       <div className="utilities">
         <h1>Task Tracker</h1>
         <h3 className="textLeftAlign">You have {tasks.length} tasks left</h3>
-        <button className="addButton" onClick={toggleTaskForm}>Add Task</button>
+        <button className="addButton" onClick={toggleTaskForm}>
+          Add Task
+        </button>
       </div>
       {isTaskFormOpen && (
         <Form
-          name={name}
-          description={description}
-          date={date}
-          updName={updateName}
-          updDescription={updateDescription}
-          updDate={updateDate}
+          type="task"
+          name={taskName}
+          description={taskDescription}
+          date={taskDate}
+          updName={updateTaskName}
+          updDescription={updateTaskDescription}
+          updDate={updateTaskDate}
           addTask={addTask}
           toggleForm={toggleTaskForm}
+        />
+      )}
+      {isTipFormOpen && (
+        <Form
+          type="tip"
+          name={tipName}
+          description={tipDescription}
+          updName={updateTipName}
+          updDescription={updateTipDescription}
+          addTip={addTip}
+          toggleForm={toggleTipForm}
         />
       )}
       <Tasks tasks={tasks} remove={removeTask} />
       <div className="utilities">
         <h3 className="textLeftAlign">Tips</h3>
+        <button className="addButton" onClick={toggleTipForm}>
+          Add Tip
+        </button>
       </div>
-      <Tips tips={tips} />
+      <Tips tips={tips} remove={removeTip} />
     </div>
   );
 }
