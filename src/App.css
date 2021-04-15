@@ -11,12 +11,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   word-wrap: break-word;
 }
 
@@ -36,6 +30,12 @@ body::-webkit-scrollbar-thumb {
 
 body {
   background: var(--dark);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 h1,
@@ -48,24 +48,35 @@ p {
   margin-top: 30px;
   text-align: center;
   color: var(--light);
+  font-weight: 900;
 }
 
 .stop-scrolling {
   overflow: hidden;
 }
 
+.temp-tasks {
+  margin-bottom: 30px;
+}
+
 .card {
   border-radius: 10px;
   margin-top: 30px;
-  width: 35%;
-  min-width: 335px;
   margin-left: auto;
   margin-right: auto;
+  width: 35%;
+  min-width: 335px;
   background-color: var(--darkMed);
   padding-left: 30px;
   padding-top: 30px;
   padding-bottom: 30px;
   padding-right: 30px;
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 .modal {
@@ -105,18 +116,21 @@ p {
   color: var(--light);
   text-align: left;
   margin-top: 0;
+  font-weight: 700;
 }
 
 .description {
   color: var(--lightMed);
   margin-top: 5px;
   text-align: left;
+  font-weight: 500;
 }
 
 .date {
   color: var(--lightMed);
   margin-top: 5px;
   text-align: left;
+  font-weight: 400;
 }
 
 .textLeftAlign {

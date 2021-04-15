@@ -1,10 +1,7 @@
-import Task from './Task';
+import Task from "./Task";
 
-function Tasks({ tasks, remove }) {
-	return (tasks.map(task => (
-		<Task key={task.id} task={task} remove={remove} />	
-	)));
+function Tasks({ tasks, updateForm }) {
+  return tasks.map((task) => <Task key={task.number} task={task} updateForm={updateForm} />);
 }
 
 export default Tasks;
-
