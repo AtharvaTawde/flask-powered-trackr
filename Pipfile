@@ -10,8 +10,5 @@ python-dotenv = "*"
 
 [dev-packages]
 
-[requires]
-python_version = "3.7"
-
 [scripts]
 api = "flask run"
