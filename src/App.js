@@ -1,62 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-import Tasks from "./components/Tasks";
-import AddTipForm from "./components/AppTipForm";
-import AddTaskForm from "./components/AddTaskForm";
+import About from "./components/About";
+import Main from "./components/Main";
 
 function App() {
-  // States
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    fetch("/tasks").then((response) =>
-      response.json().then((data) => {
-        setTasks(data.tasks);
-      })
-    );
-  }, []);
-
-  console.log(tasks);
-
-  const [isTaskFormOpen, setTaskFormStatus] = useState(false);
-  const [isTipFormOpen, setTipFormStatus] = useState(false);
-
-  // Remove Task
-  function removeTask(id) {
-    setTasks(tasks.filter((task) => task.id !== id));
-  }
-
-  // Open and Close Task Form
-  function toggleTaskForm() {
-    setTaskFormStatus(!isTaskFormOpen);
-  }
-
-  // Open and Close Tip Form
-  function toggleTipForm() {
-    setTipFormStatus(!isTipFormOpen);
-  }
-
-  function onNewTask(task) {
-    setTasks([task, ...tasks]);
-  }
-
   return (
-    <div className="App">
-      <div className="utilities">
-        <h1>Trackr</h1>
-        <h3 className="textLeftAlign">You have {tasks.length} tasks left</h3>
-        <button className="addButton" onClick={toggleTaskForm}>
-          Add Task
-        </button>
-      </div>
-      {isTaskFormOpen && (
-        <AddTaskForm onNewTask={onNewTask} toggleForm={toggleTaskForm} />
-      )}
-      {isTipFormOpen && (
-        <AddTipForm onNewTask={onNewTask} toggleForm={toggleTipForm} />
-      )}
-      <Tasks className="temp-tasks" tasks={tasks} remove={removeTask} />
-    </div>
+    <Router>
+      <React.Fragment>
+        <div className="navbar">
+          <table>
+            <tr>
+              <td>
+                <Link className="link" to="/">
+                  <h1 className="big-header">Trackr</h1>
+                </Link>
+              </td>
+              <td>
+                <Link className="link" to="/about">
+                  <h4 className="about">About</h4>
+                </Link>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div className="blank-space"></div>
+        <Switch>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+        </Switch>
+      </React.Fragment>
+    </Router>
   );
 }
 
